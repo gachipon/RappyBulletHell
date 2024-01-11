@@ -1,0 +1,40 @@
+[gd_scene load_steps=8 format=3 uid="uid://xyujj07xijap"]
+
+[ext_resource type="PackedScene" uid="uid://ct7hqcc8ntuie" path="res://tile_map.tscn" id="1_5vbjk"]
+[ext_resource type="Script" path="res://level_03.gd" id="1_760ux"]
+[ext_resource type="PackedScene" uid="uid://dycx27koh1heq" path="res://player.tscn" id="2_2uw30"]
+[ext_resource type="PackedScene" uid="uid://qsphon5nenqm" path="res://elenor.tscn" id="2_ixpu3"]
+[ext_resource type="PackedScene" uid="uid://culijryt05lhj" path="res://humar.tscn" id="3_5kqon"]
+[ext_resource type="PackedScene" uid="uid://dcxwnv1t5cd7w" path="res://rupika.tscn" id="4_pgu0e"]
+[ext_resource type="AudioStream" uid="uid://dbh83v3evoa35" path="res://PixelPeekerPolkaFaster.mp3" id="7_t642f"]
+
+[node name="level_03" type="Node2D"]
+script = ExtResource("1_760ux")
+
+[node name="TileMap" parent="." instance=ExtResource("1_5vbjk")]
+
+[node name="Player" parent="." instance=ExtResource("2_2uw30")]
+
+[node name="elenor" parent="." instance=ExtResource("2_ixpu3")]
+scale = Vector2(2, 2)
+
+[node name="Humar" parent="." instance=ExtResource("3_5kqon")]
+scale = Vector2(2, 2)
+
+[node name="rupika" parent="." instance=ExtResource("4_pgu0e")]
+scale = Vector2(2, 2)
+
+[node name="Button" type="Button" parent="."]
+offset_left = 901.0
+offset_top = 570.0
+offset_right = 1014.0
+offset_bottom = 629.0
+text = "BACK"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_t642f")
+volume_db = -4.0
+autoplay = true
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="finished" from="AudioStreamPlayer" to="." method="_on_audio_stream_player_finished"]

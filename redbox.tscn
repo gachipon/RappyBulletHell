@@ -1,0 +1,79 @@
+[gd_scene load_steps=14 format=3 uid="uid://co8uldpftsu3f"]
+
+[ext_resource type="Script" path="res://redbox.gd" id="1_aa81p"]
+[ext_resource type="Texture2D" uid="uid://juyki6c258ru" path="res://rarebox00.png" id="2_mf5pg"]
+[ext_resource type="Texture2D" uid="uid://cqfi1745rntf6" path="res://rarebox01.png" id="3_3njow"]
+[ext_resource type="Texture2D" uid="uid://bjm1jdhueuur4" path="res://rarebox02.png" id="4_um07p"]
+[ext_resource type="Texture2D" uid="uid://b2c543gwfyawb" path="res://rarebox03.png" id="5_qf8m6"]
+[ext_resource type="Texture2D" uid="uid://b1gnsyfrusw7t" path="res://rarebox04.png" id="6_eyfya"]
+[ext_resource type="Texture2D" uid="uid://bkb0gy7ov6i1y" path="res://rarebox05.png" id="7_2buav"]
+[ext_resource type="Texture2D" uid="uid://dnmup5yj8ts0" path="res://rarebox06.png" id="8_73j0f"]
+[ext_resource type="Texture2D" uid="uid://dk2ydmw3f482u" path="res://rarebox07.png" id="9_03auu"]
+[ext_resource type="Texture2D" uid="uid://bb5f7jsdtw3m3" path="res://rarebox08.png" id="10_c0301"]
+[ext_resource type="Texture2D" uid="uid://bx2t2ejx1yo2c" path="res://rarebox09.png" id="11_06kf5"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_14sf8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_mf5pg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_3njow")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_um07p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_qf8m6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_mf5pg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_eyfya")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_2buav")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_73j0f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_mf5pg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_03auu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_c0301")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_06kf5")
+}],
+"loop": true,
+"name": &"sparkle",
+"speed": 12.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_87ghm"]
+radius = 6.5
+height = 18.0
+
+[node name="redbox" type="Area2D"]
+script = ExtResource("1_aa81p")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_14sf8")
+animation = &"sparkle"
+autoplay = "sparkle"
+frame_progress = 0.00658327
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_87ghm")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

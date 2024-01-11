@@ -1,0 +1,12 @@
+Timer
+CollisionShape2D
+AnimatedSprite2D
+Area2D
+Sprite2D
+AudioStreamPlayer
+Button
+TextureRect
+Marker2D
+VisibleOnScreenNotifier2D
+CharacterBody2D
+TileMap

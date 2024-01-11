@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://cfyklegpn3aqc"]
+
+[ext_resource type="Texture2D" uid="uid://bcwxqdb8rt80p" path="res://KIREEK.png" id="1_761xp"]
+[ext_resource type="Script" path="res://kireek.gd" id="2_b0maq"]
+[ext_resource type="PackedScene" uid="uid://csnaf7mpvmb6b" path="res://kireekslash.tscn" id="3_bjhpd"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ysdkt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_761xp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="kireek" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_ysdkt")
+script = ExtResource("2_b0maq")
+projectile = ExtResource("3_bjhpd")
+
+[node name="SlashTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="SlashMarker" type="Marker2D" parent="."]
+position = Vector2(0, 11)
+
+[connection signal="timeout" from="SlashTimer" to="." method="_on_slash_timer_timeout"]

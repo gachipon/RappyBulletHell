@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://coy3jcu33o1gj"]
+
+[ext_resource type="Script" path="res://rupika_gibarta.gd" id="1_i6k46"]
+[ext_resource type="Texture2D" uid="uid://b300n41gv0nsg" path="res://icespell.png" id="2_j1cav"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wo6iq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_j1cav")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d7htb"]
+radius = 2.0
+
+[node name="rupika_gibarta" type="Area2D"]
+script = ExtResource("1_i6k46")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_wo6iq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_d7htb")
+
+[node name="FizzleTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="timeout" from="FizzleTimer" to="." method="_on_fizzle_timer_timeout"]

@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://culijryt05lhj"]
+
+[ext_resource type="Texture2D" uid="uid://mbbdirdv3hpf" path="res://HumarSlicer01.png" id="1_k8w6x"]
+[ext_resource type="Texture2D" uid="uid://c58nwfg0pla8k" path="res://HumarSlicer02.png" id="2_rycdl"]
+[ext_resource type="Script" path="res://humar.gd" id="3_ecufw"]
+[ext_resource type="PackedScene" uid="uid://dc0b5u7gfidd5" path="res://humar_projectile.tscn" id="4_ywb14"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_016r3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_rycdl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_rycdl")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_k8w6x")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="Humar" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_016r3")
+animation = &"attack"
+script = ExtResource("3_ecufw")
+projectile = ExtResource("4_ywb14")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(-12, -8)
+
+[node name="SlicerTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="MoveTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[connection signal="timeout" from="SlicerTimer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]

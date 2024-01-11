@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=3 uid="uid://qsphon5nenqm"]
+
+[ext_resource type="Texture2D" uid="uid://byu8w3r3i6ydh" path="res://ELENOR_01.png" id="1_j87hs"]
+[ext_resource type="Script" path="res://elenor.gd" id="2_n53oa"]
+[ext_resource type="PackedScene" uid="uid://lxb0w0qaiqcv" path="res://elenorbullet.tscn" id="3_qsp35"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cbhtu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_j87hs")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="elenor" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_cbhtu")
+script = ExtResource("2_n53oa")
+projectile = ExtResource("3_qsp35")
+
+[node name="bullet01" type="Marker2D" parent="."]
+position = Vector2(8, 0)
+
+[node name="bullet02" type="Marker2D" parent="."]
+position = Vector2(7, -2)
+
+[node name="bullet03" type="Marker2D" parent="."]
+position = Vector2(7, 2)
+
+[node name="bullet04" type="Marker2D" parent="."]
+position = Vector2(5, -3)
+
+[node name="bullet05" type="Marker2D" parent="."]
+position = Vector2(5, 3)
+
+[node name="ShotTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="MoveTimer" type="Timer" parent="."]
+wait_time = 6.0
+autostart = true
+
+[node name="BurstTimer" type="Timer" parent="."]
+wait_time = 2.5
+autostart = true
+
+[connection signal="timeout" from="ShotTimer" to="." method="_on_shot_timer_timeout"]
+[connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]
+[connection signal="timeout" from="BurstTimer" to="." method="_on_burst_timer_timeout"]

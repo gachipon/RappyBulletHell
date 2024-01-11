@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://dc0b5u7gfidd5"]
+
+[ext_resource type="Script" path="res://humar_projectile.gd" id="1_5kvot"]
+[ext_resource type="Texture2D" uid="uid://civ0g3b8mdvfh" path="res://Slicer_Projectile-1.png.png" id="1_o67ix"]
+[ext_resource type="Texture2D" uid="uid://qf2ex0aatnqy" path="res://Slicer_Projectile-2.png.png" id="2_oppn4"]
+[ext_resource type="Texture2D" uid="uid://u85jykyaal77" path="res://Slicer_Projectile-3.png.png" id="3_hn7t4"]
+[ext_resource type="Texture2D" uid="uid://omfmks1by8xm" path="res://Slicer_Projectile-4.png.png" id="4_vg82o"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_eerig"]
+radius = 6.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hufty"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_o67ix")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_oppn4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_hn7t4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_vg82o")
+}],
+"loop": true,
+"name": &"default",
+"speed": 18.0
+}]
+
+[node name="Humar_Projectile" type="Area2D"]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_5kvot")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_eerig")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_hufty")
+frame_progress = 0.555458
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

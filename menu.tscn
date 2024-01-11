@@ -1,0 +1,69 @@
+[gd_scene load_steps=5 format=3 uid="uid://ccatc6mlcpgxf"]
+
+[ext_resource type="Script" path="res://menu.gd" id="1_iiw42"]
+[ext_resource type="AudioStream" uid="uid://c04dc5hcotxcv" path="res://catch-it-117676.mp3" id="2_ob7jt"]
+[ext_resource type="Texture2D" uid="uid://ccednbpkvgbmb" path="res://backdrop.png" id="3_wepcd"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_6piys"]
+
+[node name="menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_iiw42")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_ob7jt")
+volume_db = -3.0
+autoplay = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1025.0
+offset_bottom = 641.0
+texture = ExtResource("3_wepcd")
+
+[node name="NormalMode" type="Button" parent="."]
+material = SubResource("CanvasItemMaterial_6piys")
+layout_mode = 0
+offset_left = 691.0
+offset_top = 215.0
+offset_right = 889.0
+offset_bottom = 281.0
+text = "NORMAL"
+
+[node name="HardMode" type="Button" parent="."]
+material = SubResource("CanvasItemMaterial_6piys")
+layout_mode = 0
+offset_left = 691.0
+offset_top = 290.0
+offset_right = 889.0
+offset_bottom = 356.0
+text = "HARD"
+
+[node name="VeryHardMode" type="Button" parent="."]
+material = SubResource("CanvasItemMaterial_6piys")
+layout_mode = 0
+offset_left = 691.0
+offset_top = 365.0
+offset_right = 889.0
+offset_bottom = 431.0
+text = "VERY HARD
+"
+
+[node name="UltimateMode" type="Button" parent="."]
+material = SubResource("CanvasItemMaterial_6piys")
+layout_mode = 0
+offset_left = 691.0
+offset_top = 440.0
+offset_right = 889.0
+offset_bottom = 506.0
+text = "ULTIMATE"
+
+[connection signal="button_down" from="NormalMode" to="." method="_on_normal_mode_button_down"]
+[connection signal="button_down" from="HardMode" to="." method="_on_hard_mode_button_down"]
+[connection signal="button_down" from="VeryHardMode" to="." method="_on_very_hard_mode_button_down"]
+[connection signal="button_down" from="UltimateMode" to="." method="_on_ultimate_mode_button_down"]

@@ -1,0 +1,90 @@
+[gd_scene load_steps=12 format=3 uid="uid://dycx27koh1heq"]
+
+[ext_resource type="Texture2D" uid="uid://dngu1i1pw58ge" path="res://rappyIdle01.png" id="1_fmkjp"]
+[ext_resource type="Script" path="res://player.gd" id="1_fv34t"]
+[ext_resource type="Texture2D" uid="uid://cqg3ifj2r033u" path="res://rappyIdle02.png" id="2_ojht2"]
+[ext_resource type="Texture2D" uid="uid://dxx6ec3no2uek" path="res://Rappy_KO_01.png" id="2_s4jre"]
+[ext_resource type="Texture2D" uid="uid://ysym5lodyyvj" path="res://Rappy_KO_02.png" id="3_bjtej"]
+[ext_resource type="Texture2D" uid="uid://djsukqt002cjl" path="res://rappyRun02.png" id="3_skwen"]
+[ext_resource type="Texture2D" uid="uid://bvv8mmkvf88ev" path="res://rappyRun01.png" id="4_vn8qp"]
+[ext_resource type="Texture2D" uid="uid://cxilq8qpjofr4" path="res://berry.png" id="9_28frc"]
+[ext_resource type="AudioStream" uid="uid://cikbn54d5vw4v" path="res://squeak-41194.mp3" id="9_osbfd"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y6qoq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_s4jre")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_bjtej")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_fmkjp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_ojht2")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_skwen")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_vn8qp")
+}],
+"loop": true,
+"name": &"run",
+"speed": 12.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7m05j"]
+radius = 4.0
+height = 9.0
+
+[node name="Player" type="CharacterBody2D"]
+scale = Vector2(2, 2)
+script = ExtResource("1_fv34t")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_y6qoq")
+animation = &"run"
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+shape = SubResource("CapsuleShape2D_7m05j")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="InvinTimer" type="Timer" parent="."]
+wait_time = 1.5
+
+[node name="DamageSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_osbfd")
+volume_db = 0.2
+pitch_scale = 1.5
+
+[node name="SprintTimer" type="Timer" parent="."]
+wait_time = 0.4
+
+[node name="StaminaCharge" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="StaminaBerry" type="Sprite2D" parent="."]
+position = Vector2(0.5, -11.5)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("9_28frc")
+
+[connection signal="timeout" from="InvinTimer" to="." method="_on_invin_timer_timeout"]
+[connection signal="timeout" from="SprintTimer" to="." method="_on_sprint_timer_timeout"]
+[connection signal="timeout" from="StaminaCharge" to="." method="_on_stamina_charge_timeout"]
